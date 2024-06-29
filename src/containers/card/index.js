@@ -2,17 +2,22 @@ import React, { useReducer, useEffect } from "react";
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import CardHeader from "../../components/card/CardHeader";
 import CardItem from "../../components/card/CardItem";
+import CardLoader from "../../components/card/CardLoader";
 import { initialState, cardReducer } from './CardReducer';
-import { listCard, addCard, deleteCard } from './CardActions';
+import { toggleLoader, listCard, addCard, deleteCard } from './CardActions';
 import './index.css';
 
 function CardContainer() {
     const [state, dispatch] = useReducer(cardReducer, initialState);
     
     useEffect(() => {
+        dispatch(toggleLoader(true))
         fetch('https://dummyjson.com/posts?limit=10')
           .then((res) => res.json())
-          .then((response) => dispatch(listCard(response.posts)))
+          .then((response) => {
+            dispatch(toggleLoader(false))
+            dispatch(listCard(response.posts))
+          })
           .catch((error) => console.error(error));
       }, []);
 
@@ -32,13 +37,17 @@ function CardContainer() {
     return (
         <div>
             <CardHeader onAdd={handleAddCard} />
-            <TransitionGroup className="card-list">
-                {state.cards.map((card) => (
-                    <CSSTransition key={card.id} timeout={500} classNames="card">
-                        <CardItem card={card} onDelete={handleDeleteCard} />
-                    </CSSTransition>
-                ))}
-            </TransitionGroup>
+            { state.isLoading ? 
+                <CardLoader /> 
+                :
+                <TransitionGroup className="card-list">
+                    {state.cards.map((card) => (
+                        <CSSTransition key={card.id} timeout={500} classNames="card">
+                            <CardItem card={card} onDelete={handleDeleteCard} />
+                        </CSSTransition>
+                    ))}
+                </TransitionGroup>
+            }
         </div>
     );
   }
