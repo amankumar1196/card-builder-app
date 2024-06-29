@@ -1,6 +1,11 @@
-function CardHeader() {
+function CardHeader({onAdd}) {
     return (
-        <div>Card Header</div>
+        <header>
+            <h2>Cards List</h2>
+            <button onClick={onAdd}>
+                Add Card
+            </button>
+        </header>
     );
   }
   
