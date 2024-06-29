@@ -1,4 +1,4 @@
-import CardContainer from "./containers/card";
+import CardContainer from "./containers/card/index.js";
 
 function App() {
   return (

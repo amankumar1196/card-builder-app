@@ -1,8 +1,10 @@
 import React, { useReducer, useEffect } from "react";
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import CardHeader from "../../components/card/CardHeader";
 import CardItem from "../../components/card/CardItem";
-import {cardReducer, initialState} from "./CardReducer";
+import { initialState, cardReducer } from './CardReducer';
 import { listCard, addCard, deleteCard } from './CardActions';
+import './index.css';
 
 function CardContainer() {
     const [state, dispatch] = useReducer(cardReducer, initialState);
@@ -26,15 +28,18 @@ function CardContainer() {
         if (!title.trim()) return;
         dispatch(addCard({ id: Date.now(), title }));
     };
-    
+
     return (
         <div>
-            <CardHeader onAdd={handleAddCard}/>
-            {state.cards.map((card) => (
-                <CardItem key={card.id} card={card} onDelete={handleDeleteCard}/>
-            ))}
+            <CardHeader onAdd={handleAddCard} />
+            <TransitionGroup className="card-list">
+                {state.cards.map((card) => (
+                    <CSSTransition key={card.id} timeout={500} classNames="card">
+                        <CardItem card={card} onDelete={handleDeleteCard} />
+                    </CSSTransition>
+                ))}
+            </TransitionGroup>
         </div>
-        
     );
   }
   
