@@ -1,0 +1,116 @@
+/* Card container CSS */
+.card-list {
+    display: grid;
+    gap: 16px;
+    padding: 16px 0;
+    margin: 0 128px;
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 128px;
+    padding: 0 8px;
+    border-bottom: 1px solid;
+  }
+  
+  /* Card CSS */
+  .card {
+    border: 1px solid #ccc;
+    padding: 16px;
+    transition: transform 0.3s ease-in-out;
+    border-radius: 10px;
+    position: relative;
+    background-color: #e4e4e4;
+  }
+  
+  .loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 80px;
+  }
+  /* Add button CSS */
+  
+  .add-card-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Delete button CSS */
+  .delete-btn {
+    background-color: white;
+    display: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+  }
+  
+  .card:hover .delete-btn {
+    display: flex;
+  }
+  
+  /* Card transition */
+  .card-enter {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  
+  .card-enter-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 500ms, transform 500ms;
+  }
+  
+  .card-exit {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  .card-exit-active {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 500ms, transform 500ms;
+  }
+  
+  /* Media queries */
+  @media (min-width: 1024px) {
+    .card-list {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .card-list {
+      grid-template-columns: repeat(3, 1fr);
+      margin: 0 64px;
+    }
+    header {
+      margin: 0 64px;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .card-list {
+      grid-template-columns: 1fr;
+      margin: 0 32px;
+    }
+    header {
+      margin: 0 32px;
+    }
+  }
+  
