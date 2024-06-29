@@ -27,11 +27,16 @@ export const initialState = {
         }
         case 'CARD_DELETE': {
             const { id } = action.payload;
-            let filteredData = state.cards.filter((item) => item.id != id);
+            let filteredData = state.cards.filter((item) => item.id !== id);
             return {
                 ...state,
                 cards: [...filteredData],
             };
+        }
+        default:{
+            return {
+                ...state
+            }
         }
     }
   };
