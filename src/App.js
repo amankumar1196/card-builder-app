@@ -1,7 +1,9 @@
+import CardContainer from "./containers/card";
+
 function App() {
   return (
     <div className="App">
-      <div>Start</div>
+      <CardContainer />
     </div>
   );
 }
