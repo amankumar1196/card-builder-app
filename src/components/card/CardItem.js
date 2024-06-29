@@ -1,6 +1,8 @@
-function CardItem() {
+function CardItem({card}) {
     return (
-        <div>Card Item</div>
+        <div>
+            <h3>{card.title}</h3>
+        </div>
     );
   }
   
